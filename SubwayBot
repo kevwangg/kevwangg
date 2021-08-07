@@ -1,0 +1,30 @@
+import random
+import discord
+sandwich = ['cali fresh turkey', 'cali fresh steak', 'all american', 'black forest ham', 'buffalo chicken', 'cold cut combo', 'italian bmt', 'meatball marinara', 'oven roasted turkey', 'spicy italian', 'sweet onion chicken teriyaki', 'tuna']
+bread = ['artisan italian', 'multigrain', 'herbs & cheese']
+cheese = ['american', 'cheddar', 'pepperjack', 'provolone', 'swiss']
+veggies = ['lettuce', 'tomatoes', 'cucumbers', 'green peppers', 'red onions', 'spinach', 'pickles', 'black olives', 'jalepenos', 'banana peppers']
+sauces = ['mayonnaise', 'yellow mustard', 'honey mustard', 'caesar', 'buffalo sauce', 'ranch', 'marinara', 'sweet onion']
+random_number = random.randint(5,10)
+random_numbertwo = random.randint(1, 2)
+
+
+client = discord.Client()
+
+@client.event
+async def on_ready():
+    print('We have logged in as {0.user}'.format(client))
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('$subway'):
+        await message.channel.send(random.choice(sandwich))
+        await message.channel.send(random.choice(bread))
+        await message.channel.send(random.choice(cheese))
+        await message.channel.send(random.sample(veggies, random_number))
+        await message.channel.send(random.sample(sauces, random_numbertwo))
+
+client.run('ODY4Mjk2NTc1NzQxNDkzMzA4.YPtmMw.DQP_ARDlJhDCsA1ejh-VawEBFBQ')
